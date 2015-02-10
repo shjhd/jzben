@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  price: MyString
+  time: MyString
+  lei: MyString
+  ps: MyString
+
+two:
+  price: MyString
+  time: MyString
+  lei: MyString
+  ps: MyString
