@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.21'
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bcrypt-ruby', '3.0.1'
+gem 'bootstrap_form', '2.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,6 +24,18 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :development do
+  gem 'annotate', '2.5.0'
+end
+
+group :test, :development do
+  gem 'rb-fsevent'
+  gem 'guard'
+  gem 'guard-bundler', '>= 0.1.3'
+  gem 'guard-pow', '>= 1.0.0'
+  gem 'guard-livereload', '>= 0.3.0'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

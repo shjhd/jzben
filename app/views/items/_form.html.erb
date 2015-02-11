@@ -1,4 +1,4 @@
-<%= form_for(@item) do |f| %>
+<%= bootstrap_form_for(@item) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -12,22 +12,35 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br />
-    <%= f.text_field :time %>
-  </div>
-  <div class="field">
-    <%= f.label :lei %><br />
-    <%= f.text_field :lei %>
-  </div>
-  <div class="field">
-    <%= f.label :ps %><br />
-    <%= f.text_field :ps %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="input-group price-btn">
+      <div class="input-group-addon">$</div>
+      <%= f.text_field( :price, hide_label: :true, :class=>"form-control",:id=>"exampleInputAmount",:placeholder=>"金额：") %>
+      <div class="input-group-addon">.00</div>
+    </div>
+    <div class="form-group price-btn">
+      <%= f.text_field( :time, label: "时间", :class=>"form-control form-input",:placeholder=>"title") %>
+    </div>
+    <div class="form-group price-btn">
+      <%= f.select( :lei, [['支出', '支出'], ['收入', '收入']] ) %>
+    </div>
+    <div class="form-group price-btn">
+      <%= f.label :用途 %>
+      <select class="form-control form-input">
+        <option value ="pay" click="clicked">餐饮饮食</option>
+        <option value ="get">日常用品</option>
+        <option value ="get">文化娱乐</option>
+        <option value ="get">交通通讯</option>
+        <option value ="get">美容装扮</option>
+        <option value ="get">人情往来</option>
+        <option value ="get">其他支出</option>
+        <option value ="get">收入</option>
+      </select>
+    </div>
+    <div class="form-group price-btn">
+      <%= f.text_field( :ps, label: "备注",:class=>"form-control form-input", :placeholder=>"title", :size =>"50" ) %>
+    </div>
+    <div class="actions">
+      <%= f.submit "保存",:class=>"btn btn-primary btn-form"%>
+    </div>
+</div>
 <% end %>

@@ -1,0 +1,50 @@
+@import "_variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "_bootswatch";
+
+body{
+	background: image-url("bg.jpg");
+}
+
+.container{
+	max-width: 980px;
+	width: 100%;
+	.navbar-brand{
+		font-size: 30px;
+	}
+	.header-center{
+		max-width: 500px;
+		width: 100%;
+		margin-left: 50px;
+		li{
+			width:100px;
+			text-align: center;
+			font-size: 18px;
+		}
+	}
+}
+.body-bg{
+	background: image-url("conbg.gif") repeat-y;
+	width: 998px;
+	height: 500px;
+	margin: 0 auto;
+	margin-top: -21px;
+	.price-btn{
+		width: 500px;
+		margin: 0 auto;
+		padding-top: 30px;
+	}
+	.form-input{
+		width: 300px;
+		display: inline-block;
+	}
+	.actions{
+		width: 200px;
+		margin: 0 auto;
+		margin-top: 30px;
+		.btn-form{
+			width: 100px;
+		}
+	}
+}
