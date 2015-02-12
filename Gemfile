@@ -35,6 +35,7 @@ group :test, :development do
   gem 'guard-bundler', '>= 0.1.3'
   gem 'guard-pow', '>= 1.0.0'
   gem 'guard-livereload', '>= 0.3.0'
+  gem 'quiet_assets'
 end
 
 # To use ActiveModel has_secure_password

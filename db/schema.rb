@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150210093434) do
+ActiveRecord::Schema.define(:version => 20150212061629) do
 
   create_table "items", :force => true do |t|
-    t.string   "price"
-    t.string   "time"
     t.string   "lei"
     t.string   "ps"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.decimal  "price",      :precision => 8, :scale => 2
+    t.date     "time"
+    t.string   "way"
   end
 
 end

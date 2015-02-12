@@ -108,6 +108,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -175,6 +177,7 @@ DEPENDENCIES
   guard-pow (>= 1.0.0)
   jquery-rails
   mysql2
+  quiet_assets
   rails (= 3.2.21)
   rb-fsevent
   sass-rails (~> 3.2.3)

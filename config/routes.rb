@@ -2,9 +2,7 @@ Jzben::Application.routes.draw do
   resources :items
 
   root to: 'items#index'
-  match '/',  to: 'items#index'
-  match '/jizhang',  to: 'items#jizhang'
-  match '/new',  to: 'items#new'
+  match '/new',  to: 'items#index'
 
 
   # The priority is based upon order of creation:

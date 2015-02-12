@@ -26,25 +26,25 @@ body{
 }
 .body-bg{
 	background: image-url("conbg.gif") repeat-y;
-	width: 998px;
-	height: 500px;
+	max-width: 998px;
+	width: 100%;
 	margin: 0 auto;
 	margin-top: -21px;
-	.price-btn{
-		width: 500px;
+	.field{
+		width: 600px;
 		margin: 0 auto;
 		padding-top: 30px;
 	}
 	.form-input{
 		width: 300px;
+		margin-left: 10px;
 		display: inline-block;
 	}
-	.actions{
-		width: 200px;
-		margin: 0 auto;
-		margin-top: 30px;
-		.btn-form{
-			width: 100px;
-		}
+	.btn-form{
+		width: 150px;
+		margin-left: 100px;
 	}
+}
+.table{
+	margin-top: 50px;
 }

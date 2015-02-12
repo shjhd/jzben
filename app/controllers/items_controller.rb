@@ -2,7 +2,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    # @items = Item.all
+    @item = Item.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,17 +18,6 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @item }
-    end
-  end
-
-  # GET /items/new
-  # GET /items/new.json
-  def new
-    @item = Item.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @item }
     end
   end
@@ -47,7 +37,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end

@@ -14,8 +14,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav header-center">
-        <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
-        <li><%= link_to "记账", new_path %></li>
+        <li class="<%= params[:controller] == 'home' ? 'active' : '' %>"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+        <li class="<%= params[:controller] == 'items' ? 'active' : '' %>"><%= link_to "记账", new_path %></li>
         <li><a href="#">报表</a></li>
         <li><a href="#">设置</a></li>
       </ul>
