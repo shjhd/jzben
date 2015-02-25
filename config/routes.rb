@@ -1,8 +1,23 @@
 Jzben::Application.routes.draw do
+  resources :users
+  resources :homes
+  resources :baobiaos
+  resources :shezhis
   resources :items
+  resources :sessions, only: [:new, :create, :destroy]
 
-  root to: 'items#index'
+  root to: 'homes#index'
+  match '/',  to: 'homes#index'
   match '/new',  to: 'items#index'
+  match '/table',  to: 'baobiaos#index'
+  match '/yeartable',  to: 'baobiaos#yearbiao'
+  match '/matchtable',  to: 'baobiaos#duizhang'
+  match '/set',  to: 'shezhis#index'
+  match '/homes',  to: 'homes#index'
+
+  match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
 
   # The priority is based upon order of creation:

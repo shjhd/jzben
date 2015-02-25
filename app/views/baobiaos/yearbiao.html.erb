@@ -1,0 +1,25 @@
+<div class="btn-group btn-group-justified new-panel">
+  <%= link_to '收支统计', table_path,:class=>"btn btn-primary" %>
+  <a href="#" class="btn btn-primary active">年度报表</a>
+  <%= link_to '对账单', matchtable_path,:class=>"btn btn-primary" %>
+</div>
+
+<div class="panel panel-default new-panel">
+  <div class="panel-heading clearfix">
+    <ul class="nav navbar-nav year-nav">
+      <li>
+        <select>
+          <option>2014</option>
+          <option>2015</option>
+          <option>2016</option>
+        </select>
+      </li>
+      <li class="year-li"><p>年收入：</p></li>
+      <li><p>年支出：</p></li>
+      <li><p>年结余：</p></li>
+    </ul>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>

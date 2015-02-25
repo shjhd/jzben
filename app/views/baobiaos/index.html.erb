@@ -1,0 +1,29 @@
+<div class="btn-group btn-group-justified new-panel">
+  <a href="#" class="btn btn-primary active">收支统计</a>
+  <%= link_to '年度报表', yeartable_path,:class=>"btn btn-primary" %>
+  <%= link_to '对账单', matchtable_path,:class=>"btn btn-primary" %>
+</div>
+
+<div class="panel panel-default new-panel">
+  <div class="panel-heading">
+    <select>
+      <option>2014</option>
+      <option>2015</option>
+      <option>2016</option>
+    </select>
+    <a class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+    <a href="#">1月</a>
+    <a href="#">2月</a>
+    <a href="#">3月</a>
+    <a href="#">4月</a>
+    <a href="#">5月</a>
+    <a href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+
+    <a href="#" class="btn btn-default btn-xs a-left">本年</a>
+    <a href="#" class="btn btn-default btn-xs">本季</a>
+    <a href="#" class="btn btn-default btn-xs">时间范围</a>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>

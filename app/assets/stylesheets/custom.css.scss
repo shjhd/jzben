@@ -3,6 +3,20 @@
 @import "bootstrap";
 @import "_bootswatch";
 
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
 body{
 	background: image-url("bg.jpg");
 }
@@ -45,6 +59,46 @@ body{
 		margin-left: 100px;
 	}
 }
-.table{
+.my-table{
 	margin-top: 50px;
+}
+.table,th{
+	text-align: center;
+}
+.footer{
+	background: image-url("con_bottom.gif") no-repeat;
+	max-width: 998px;
+	width:100%;
+	height: 18px;
+	margin: 0 auto;
+}
+//shezhi
+.new-panel{
+	margin-top:20px;
+}
+.shezhi-table{
+	text-align: center;
+	th,td{
+		text-align: center;
+		width: 33.33%;
+	}
+}
+//baobiao
+.a-left{
+	margin-left: 98px;
+}
+//yearbiao
+.year-nav{
+	height: 23px;
+	li{
+		margin-right: 50px;
+	}
+	.year-li{
+		margin-left: 120px;
+	}
+}
+//Users
+label{
+	width: 70px;
+	text-align: center;
 }
