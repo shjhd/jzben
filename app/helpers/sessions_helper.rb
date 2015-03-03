@@ -4,6 +4,7 @@ module SessionsHelper
     self.current_user = user
   end
   def signed_in?
+    Rails.logger.info cookies[:remember_token]
     !current_user.nil?
   end
   def current_user=(user)
@@ -11,6 +12,9 @@ module SessionsHelper
   end
   def current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+  end
+  def current_user?(user)
+    user == current_user
   end
   def sign_out
     self.current_user = nil
