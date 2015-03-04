@@ -3,16 +3,33 @@
       <%= f.alert_message "Please fix the errors below." %>
       <%= f.text_field( :price, prepend: "$", append: ".00", hide_label: :true,:placeholder=>"金额：") %>
       <%= f.text_field( :time, :label=> "时间",:class=>"form-input datepicker",:placeholder=>"title") %>
-      <%= f.select( :lei, [['支出', '支出'], ['收入', '收入']],{},{:label=>"类型",:class=>"form-input"} ) %>
+      <%= f.select( :lei, [['支出', '支出'], ['收入', '收入']],{},{:label=>"类型",:class=>"form-input select-lei"} ) %>
       <%= f.select( :way, Shezhi.all.collect {|s| [ s.way, s.way ] },{},{:label=>"用途",:class=>"form-input"} ) %>
       <%= f.text_field( :ps, :label=>"备注",:class=>"form-input", :placeholder=>"title" ) %>
       <%= f.submit "保存",:class=>"btn btn-primary btn-form"%>
 </div>
 <% end %>
 <script type="text/javascript">
-  $('.datepicker').datetimepicker({
+  $('.datepicker').datepicker({
     format: 'yyyy-mm-dd',
-    startDate: '-3d',
-    startView: '2'
-})
+    autoclose: true,
+    todayBtn:"linked"
+});
+  $('.select-lei').change(function(){
+    $.ajax({
+      url: '/set.json',
+      type: 'GET',
+      dataType: 'json',
+      data: {lei: $('.select-lei').val()},
+      success:function(data){
+        var options = '';
+        $.each(data,function(i,n){
+          var way=n.way;
+          options = options + "<option value="+way+">"+way+"</option>"
+        })
+        $('#item_way').html(options);
+      }
+    });
+  });
+
 </script>

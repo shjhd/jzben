@@ -2,7 +2,11 @@ class ShezhisController < ApplicationController
   # GET /shezhis
   # GET /shezhis.json
   def index
-    @shezhis = Shezhi.all
+    if params[:lei]
+      @shezhis = Shezhi.where(:lei => params[:lei])
+    else
+      @shezhis = Shezhi.all
+    end
     @shezhi = Shezhi.new
 
     respond_to do |format|

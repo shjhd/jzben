@@ -1,5 +1,5 @@
 <%= render 'form' %>
-<table class="table table-striped table-hover shezhi-table">
+<table class="table table-striped table-hover shezhi-table lei-pay">
   <tr>
     <th>名称</th>
     <th>类型</th>
@@ -17,7 +17,7 @@
 <% end %>
 </table>
 
-<table class="table table-striped table-hover shezhi-table ">
+<table class="table table-striped table-hover shezhi-table lei-get">
   <tr>
     <th>名称</th>
     <th>类型</th>
@@ -34,3 +34,16 @@
   </tr>
 <% end %>
 </table>
+
+<script type="text/javascript">
+  $.ajax({
+    url: '/set.json',
+    type: 'GET',
+    dataType: 'json',
+    data: {lei: '支出'},
+    success : function (data) {
+            $.each(data.way, function (i, way) {
+              })
+          }
+  });
+</script>

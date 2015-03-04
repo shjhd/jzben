@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     # @items = Item.all
-    @shezhis = Shezhi.all
     @item = Item.new
 
     respond_to do |format|
