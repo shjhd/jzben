@@ -5,16 +5,15 @@
     <th>类型</th>
     <th></th>
   </tr>
-
-<% @shezhis.each do |shezhi| %>
-  <tr class="danger">
-    <td><%= shezhi.way %></td>
-    <td><%= shezhi.lei %></td>
-    <td><%= link_to '', edit_shezhi_path(shezhi),:class=>"glyphicon glyphicon-pencil" %>
-        <%= link_to '', shezhi, method: :delete, data: { confirm: 'Are you sure?' },:class=>"glyphicon glyphicon-remove" %>
-    </td>
-  </tr>
-<% end %>
+    <% Shezhi.where(:lei =>'支出').each do |shezhi| %>
+    <tr class="danger">
+      <td><%= shezhi.way %></td>
+      <td><%= shezhi.lei %></td>
+      <td><%= link_to '', edit_shezhi_path(shezhi),:class=>"glyphicon glyphicon-pencil" %>
+          <%= link_to '', shezhi, method: :delete, data: { confirm: 'Are you sure?' },:class=>"glyphicon glyphicon-remove" %>
+      </td>
+    </tr>
+    <% end %>
 </table>
 
 <table class="table table-striped table-hover shezhi-table lei-get">
@@ -23,27 +22,51 @@
     <th>类型</th>
     <th></th>
   </tr>
-
-<% @shezhis.each do |shezhi| %>
-  <tr class="danger">
-    <td><%= shezhi.way %></td>
-    <td><%= shezhi.lei %></td>
-    <td><%= link_to '', edit_shezhi_path(shezhi),:class=>"glyphicon glyphicon-pencil" %>
-        <%= link_to '', shezhi, method: :delete, data: { confirm: 'Are you sure?' },:class=>"glyphicon glyphicon-remove" %>
-    </td>
-  </tr>
-<% end %>
+  <% Shezhi.where(:lei =>'收入').each do |shezhi| %>
+    <tr class="danger">
+      <td><%= shezhi.way %></td>
+      <td><%= shezhi.lei %></td>
+      <td><%= link_to '', edit_shezhi_path(shezhi),:class=>"glyphicon glyphicon-pencil" %>
+          <%= link_to '', shezhi, method: :delete, data: { confirm: 'Are you sure?' },:class=>"glyphicon glyphicon-remove" %>
+      </td>
+    </tr>
+    <% end %>
 </table>
 
 <script type="text/javascript">
-  $.ajax({
+ /* $.ajax({
     url: '/set.json',
     type: 'GET',
     dataType: 'json',
     data: {lei: '支出'},
     success : function (data) {
-            $.each(data.way, function (i, way) {
-              })
+            $.each(data, function (i, n) {
+              var tr='<tr class="danger">';
+              var td ='';
+              var lei=n.lei;
+              var way=n.way;
+              td = td +"<td>"+way+"</td>"+"<td>"+lei+"</td>"+"<td></td>";
+              tr = tr + td +"</tr>";
+              $('.lei-pay').append(tr);
+               })
           }
   });
+
+  $.ajax({
+    url: '/set.json',
+    type: 'GET',
+    dataType: 'json',
+    data: {lei: '收入'},
+    success : function (data) {
+            $.each(data, function (i, n) {
+              var tr='<tr class="danger">';
+              var td ='';
+              var lei=n.lei;
+              var way=n.way;
+              td = td +"<td>"+way+"</td>"+"<td>"+lei+"</td>"+"<td></td>";
+              tr = tr + td +"</tr>";
+              $('.lei-get').append(tr);
+               })
+          }
+  });*/
 </script>

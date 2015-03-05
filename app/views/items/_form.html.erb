@@ -4,7 +4,7 @@
       <%= f.text_field( :price, prepend: "$", append: ".00", hide_label: :true,:placeholder=>"金额：") %>
       <%= f.text_field( :time, :label=> "时间",:class=>"form-input datepicker",:placeholder=>"title") %>
       <%= f.select( :lei, [['支出', '支出'], ['收入', '收入']],{},{:label=>"类型",:class=>"form-input select-lei"} ) %>
-      <%= f.select( :way, Shezhi.all.collect {|s| [ s.way, s.way ] },{},{:label=>"用途",:class=>"form-input"} ) %>
+      <%= f.select( :way, Shezhi.where(:lei =>'支出').collect {|s| [ s.way, s.way ] },{},{:label=>"用途",:class=>"form-input"} ) %>
       <%= f.text_field( :ps, :label=>"备注",:class=>"form-input", :placeholder=>"title" ) %>
       <%= f.submit "保存",:class=>"btn btn-primary btn-form"%>
 </div>
