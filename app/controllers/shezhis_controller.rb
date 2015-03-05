@@ -40,9 +40,11 @@ class ShezhisController < ApplicationController
       if @shezhi.save
         format.html { redirect_to @shezhi, notice: 'Shezhi was successfully created.' }
         format.json { render json: @shezhi, status: :created, location: @shezhi }
+        format.js
       else
         format.html { render action: "index" }
         format.json { render json: @shezhi.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -72,6 +74,7 @@ class ShezhisController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shezhis_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end
