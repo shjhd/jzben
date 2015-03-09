@@ -4,6 +4,7 @@ gem 'rails', '3.2.21'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'bootstrap_form', '2.0.1'
+gem 'kaminari'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

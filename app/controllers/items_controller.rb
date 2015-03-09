@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    # @items = Item.all
+    @items = Item.order('time desc').page(params[:page])
     @item = Item.new
 
     respond_to do |format|
