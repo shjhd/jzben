@@ -36,9 +36,11 @@ class ItemsController < ApplicationController
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
+        format.js
       else
         format.html { render action: "index" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -68,6 +70,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end
