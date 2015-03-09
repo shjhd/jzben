@@ -1,2 +1,6 @@
 $('.sz-lei').val('');
-$('.lei-all').append("<tr class='danger'><td><%= escape_javascript(@shezhi.way)%></td><td><%= escape_javascript(@shezhi.lei)%></td><td><%= escape_javascript(link_to('', edit_shezhi_path(@shezhi),:class=>'glyphicon glyphicon-pencil')) %><%= escape_javascript(link_to('', @shezhi, method: :delete,:remote=>true, data: { confirm: 'Are you sure?' },:class=>'glyphicon glyphicon-remove delete-items'))%></td></tr>");
+if($('#shezhi_lei').find("option:selected").text()=='支出'){
+	$('.lei-pay').append("<tr class='danger'><td><%= escape_javascript(@shezhi.way)%></td><td><%= escape_javascript(@shezhi.lei)%></td><td><%= escape_javascript(link_to('', edit_shezhi_path(@shezhi),:class=>'glyphicon glyphicon-pencil')) %><%= escape_javascript(link_to('', @shezhi, method: :delete,:remote=>true, data: { confirm: 'Are you sure?' },:class=>'glyphicon glyphicon-remove delete-items'))%></td></tr>");
+}
+else{
+	$('.lei-get').append("<tr class='danger'><td><%= escape_javascript(@shezhi.way)%></td><td><%= escape_javascript(@shezhi.lei)%></td><td><%= escape_javascript(link_to('', edit_shezhi_path(@shezhi),:class=>'glyphicon glyphicon-pencil')) %><%= escape_javascript(link_to('', @shezhi, method: :delete,:remote=>true, data: { confirm: 'Are you sure?' },:class=>'glyphicon glyphicon-remove delete-items'))%></td></tr>");}
