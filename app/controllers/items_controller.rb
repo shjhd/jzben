@@ -2,6 +2,11 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    if params[:lei]
+      @shezhis = Item.where(:lei => params[:lei])
+    else
+      @shezhis = Item.all
+    end
     @items = Item.order('time desc').page(params[:page])
     @item = Item.new
 

@@ -12,11 +12,11 @@
       <option>2016</option>
     </select>
     <a class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
-    <a href="#">1月</a>
-    <a href="#">2月</a>
-    <a href="#">3月</a>
-    <a href="#">4月</a>
-    <a href="#">5月</a>
+    <a href="#" class="jan">1月</a>
+    <a href="#" id="feb">2月</a>
+    <a href="#" class="mat">3月</a>
+    <a href="#" class="apr">4月</a>
+    <a href="#" class="may">5月</a>
     <a href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
 
     <a href="#" class="btn btn-default btn-xs a-left">本年</a>
@@ -38,6 +38,8 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('payget'));
+      var jsonLei=['支出','收入','支出','收入','支出','收入'];
+      var jsonPrice=['268','767','342','875','1280','2313'];
       var option = {
       tooltip : {
         trigger: 'them'
@@ -64,10 +66,28 @@
               center: ['50%', '60%'],
               radius: [0, '70%'],
               selectedMode:'single',
-              data:[
-                  {value: 800,  name:'支出'},
-                  {value: 500,  name:'收入'}
-                  ]
+              data:(function(){
+                var res=[];
+                var len=-1;
+                while (len++< 1){
+                  res.push({
+                    name:jsonLei[len],
+                    value:jsonPrice[len]
+                  })
+                }
+                document.getElementById("feb").onclick=function(){
+                  var ret=[];
+                  var len=1;
+                  while (len++< 3){
+                  ret.push({
+                    name:jsonLei[len],
+                    value:jsonPrice[len]
+                  })
+                }
+                return ret;
+                }
+                return res;
+              })()
             }
         ],
         color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']

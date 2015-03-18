@@ -49,6 +49,8 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('main'));
+      var jsonLei=['淘宝购物','日常消费','美容装扮','娱乐休闲','旅游观光'];
+      var jsonPrice=['268','767','342','875','1280'];
       var option = {
       tooltip : {
         trigger: 'them'
@@ -75,43 +77,46 @@
               center: ['50%', '60%'],
               radius: [0, '70%'],
               selectedMode:'single',
-              data:[
-                  {value: 128 + 80,  name:'淘宝购物'},
-                  {value: 64  + 160,  name:'日常消费'},
-                  {value: 32  + 320,  name:'美容装扮'},
-                  {value: 16  + 640,  name:'娱乐休闲'},
-                  {value: 8  + 1280, name:'旅游观光'}]
+              data:(function(){
+                var res=[];
+                var len=-1;
+                while (len++< 5){
+                  res.push({
+                    name:jsonLei[len],
+                    value:jsonPrice[len]
+                  })
+                }
+                return res;
+              })()
             }
         ],
         color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
                   }
+        // loadDATA(option);
         myChart.setOption(option);
     }
 );
-
-        // loadDATA(option);
-        // function loadDATA(option){
-        //     $.ajax({
-        //        type : "post",
-        //        async : false, //同步执行
-        //        url : "bar.do",
-        //        data : {},
-        //        dataType : "json", //返回数据形式为json
-        //        success : function(result) {
-        //                   if (result) {
-        //                          //初始化option.xAxis[0]中的data
-        //                           option.xAxis[0].data=[];
-        //                           for(var i=0;i<result.length;i++){
-        //                             option.xAxis[0].data.push(result[i].name);
-        //                           }
-        //                           //初始化option.series[0]中的data
-        //                           option.series[0].data=[];
-        //                           for(var i=0;i<result.length;i++){
-        //                             option.series[0].data.push(result[i].num);
-        //                           }
-        //                    }
-        //                 }
-        //     });
+    // function loadDATA(option){
+    //   $.ajax({
+    //     url:"/items.json?lei=支出",
+    //     type:"get",
+    //     dataType:"json",
+    //     async:false,
+    //     data:{},
+    //     success:function(result){
+    //       if(result){
+    //         option.xAxis[0].data=[];
+    //         for(var i=0;i< result.length;i++){
+    //           option.xAxis[0].data.push(result[i].way);
+    //         }
+    //         option.series[0].data=[];
+    //         for(var i=0;i< result.length;i++){
+    //           option.series[0].data.push(result[i].price);
+    //         }
+    //       }
+    //     }
+    //   })
+    // }
     </script>
   </div>
 </div>
