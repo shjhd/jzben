@@ -15,4 +15,8 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require locales/bootstrap-datepicker.zh-CN
+//= require echarts.js
+//= require chart/bar.js
+//= require chart/line.js
+//= require chart/pie.js
 //= require_tree .

@@ -16,5 +16,5 @@ class Item < ActiveRecord::Base
   attr_accessible :lei, :price, :ps, :time, :way
   validates :price, numericality: { only_integer: true }
   validates :ps, length: { maximum: 20 }
-  paginates_per 10
+  paginates_per 8
 end

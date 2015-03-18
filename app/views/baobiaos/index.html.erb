@@ -23,7 +23,58 @@
     <a href="#" class="btn btn-default btn-xs">本季</a>
     <a href="#" class="btn btn-default btn-xs">时间范围</a>
   </div>
-  <div class="panel-body">
+  <div id="payget" class="panel-body" style="height:400px">
     Panel content
+  <script type="text/javascript">
+    require.config({
+      paths: {
+          echarts: './js/dist'
+      }
+    });
+    require(
+      [
+        'echarts',
+        'echarts/chart/pie'
+      ],
+    function (ec) {
+      var myChart = ec.init(document.getElementById('payget'));
+      var option = {
+      tooltip : {
+        trigger: 'them'
+        },
+        legend: {
+            orient: 'vertical',
+            x:'left',
+            y:'top',
+            data:['支出','收入']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series : [
+            {
+              name:'收支统计',
+              type:'pie',
+              center: ['50%', '60%'],
+              radius: [0, '70%'],
+              selectedMode:'single',
+              data:[
+                  {value: 800,  name:'支出'},
+                  {value: 500,  name:'收入'}
+                  ]
+            }
+        ],
+        color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
+                  }
+        myChart.setOption(option);
+    }
+);
+</script>
   </div>
 </div>
