@@ -2,6 +2,7 @@ Jzben::Application.routes.draw do
   resources :users
   resources :homes
   resources :baobiaos
+  resources :reports
   resources :shezhis
   resources :items
   resources :sessions, only: [:new, :create, :destroy]

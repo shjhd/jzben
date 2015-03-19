@@ -78,16 +78,35 @@
               radius: [0, '70%'],
               selectedMode:'single',
               data:(function(){
-                var res=[];
-                var len=-1;
-                while (len++< 5){
-                  res.push({
-                    name:jsonLei[len],
-                    value:jsonPrice[len]
-                  })
-                }
-                return res;
-              })()
+                      var arrY=[];
+                       $.ajax(
+                       {
+                           url:"fixedExpensesAccountAction!dataXY.action",
+                           dataType:"text",
+                           async: false,
+                           success:function(data)
+                           {
+                              var rows=eval(data);
+                              for(var i=0;i<rows.length;i++)
+                              {
+                              arrY.push(rows[i].accountAmt);
+                              }
+                            }
+                          });
+                        }
+                       return arrY;
+                      })()
+              (function(){
+              //   var res=[];
+              //   var len=-1;
+              //   while (len++< 5){
+              //     res.push({
+              //       name:jsonLei[len],
+              //       value:jsonPrice[len]
+              //     })
+              //   }
+              //   return res;
+              // })()
             }
         ],
         color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
@@ -98,20 +117,16 @@
 );
     // function loadDATA(option){
     //   $.ajax({
-    //     url:"/items.json?lei=支出",
+    //     url:"/reports.json?lei=支出",
     //     type:"get",
     //     dataType:"json",
     //     async:false,
     //     data:{},
     //     success:function(result){
     //       if(result){
-    //         option.xAxis[0].data=[];
-    //         for(var i=0;i< result.length;i++){
-    //           option.xAxis[0].data.push(result[i].way);
-    //         }
     //         option.series[0].data=[];
     //         for(var i=0;i< result.length;i++){
-    //           option.series[0].data.push(result[i].price);
+    //           option.series[0].data.push({name:result[i].name,value:result[i].price});
     //         }
     //       }
     //     }
