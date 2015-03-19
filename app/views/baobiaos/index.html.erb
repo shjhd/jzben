@@ -8,15 +8,15 @@
   <div class="panel-heading">
     <select>
       <option>2014</option>
-      <option>2015</option>
+      <option selected="selected">2015</option>
       <option>2016</option>
     </select>
     <a class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
-    <a href="#" class="jan">1月</a>
+    <a href="#" id="jan">1月</a>
     <a href="#" id="feb">2月</a>
-    <a href="#" class="mat">3月</a>
-    <a href="#" class="apr">4月</a>
-    <a href="#" class="may">5月</a>
+    <a href="#" id="mat">3月</a>
+    <a href="#" id="apr">4月</a>
+    <a href="#" id="may">5月</a>
     <a href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
 
     <a href="#" class="btn btn-default btn-xs a-left">本年</a>
@@ -38,61 +38,96 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('payget'));
-      var jsonLei=['支出','收入','支出','收入','支出','收入'];
-      var jsonPrice=['268','767','342','875','1280','2313'];
-      var option = {
-      tooltip : {
-        trigger: 'them'
+     options:[
+        option1={
+          tooltip : {
+            trigger: 'them'
+          },
+          color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51'],
+          legend: {
+              orient: 'vertical',
+              x:'left',
+              y:'top',
+              data:['支出','收入']
+          },
+          toolbox: {
+              show : true,
+              feature : {
+                  dataView : {show: true, readOnly: false},
+                  magicType : {show: true, type: ['line', 'bar']},
+                  restore : {show: true},
+                  saveAsImage : {show: true}
+              }
+          },
+          series : [
+              {
+                name:'收支统计',
+                type:'pie',
+                center: ['50%', '60%'],
+                radius: [0, '70%'],
+                selectedMode:'single',
+                data:[ {value:335, name:'支出'},
+                  {value:310, name:'收入'}]
+              }
+          ]
         },
-        legend: {
-            orient: 'vertical',
-            x:'left',
-            y:'top',
-            data:['支出','收入']
-        },
-        toolbox: {
-            show : true,
-            feature : {
-                dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        series : [
-            {
-              name:'收支统计',
-              type:'pie',
-              center: ['50%', '60%'],
-              radius: [0, '70%'],
-              selectedMode:'single',
-              data:(function(){
-                var res=[];
-                var len=-1;
-                while (len++< 1){
-                  res.push({
-                    name:jsonLei[len],
-                    value:jsonPrice[len]
-                  })
-                }
-                document.getElementById("feb").onclick=function(){
-                  var ret=[];
-                  var len=1;
-                  while (len++< 3){
-                  ret.push({
-                    name:jsonLei[len],
-                    value:jsonPrice[len]
-                  })
-                }
-                return ret;
-                }
-                return res;
-              })()
-            }
-        ],
-        color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
-                  }
-        myChart.setOption(option);
+        option2={
+          series: [
+          {
+            name:'收支统计',
+            type:'pie',
+            data:[ {value:311, name:'支出'},
+              {value:710, name:'收入'}]
+          }
+        ]
+      },
+      option3={
+          series: [
+          {
+            name:'收支统计',
+            type:'pie',
+            data:[ {value:411, name:'支出'},
+              {value:710, name:'收入'}]
+          }
+        ]
+      },
+      option4={
+          series: [
+          {
+            name:'收支统计',
+            type:'pie',
+            data:[ {value:311, name:'支出'},
+              {value:980, name:'收入'}]
+          }
+        ]
+      },
+      option5={
+          series: [
+          {
+            name:'收支统计',
+            type:'pie',
+            data:[ {value:781, name:'支出'},
+              {value:560, name:'收入'}]
+          }
+        ]
+      }
+    ]
+          myChart.setOption(option1);
+          $('#jan').click(function() {
+            myChart.setOption(option1);
+          });
+          $('#feb').click(function() {
+            myChart.setOption(option2);
+          });
+          $('#mat').click(function() {
+            myChart.setOption(option3);
+          });
+          $('#apr').click(function() {
+            myChart.setOption(option4);
+          });
+          $('#may').click(function() {
+            myChart.setOption(option5);
+          });
     }
 );
 </script>
