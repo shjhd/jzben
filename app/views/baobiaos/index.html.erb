@@ -42,33 +42,45 @@
       var year = $(this).val();
       if(year=='2015'){
         var nowmonth = moment().format('MMM');
-        var num=moment().format('M');
-        var selm='';
-        selm="<a id="+nowmonth+">"+nowmonth+"</a>";
+        var startdata = moment().startOf('month').format('YYYY-MM-DD');
+        var enddata = moment().endOf('month').format('YYYY-MM-DD');
+        var num = moment().format('M');
+        var selm = '';
+        selm="<a data-begin="+startdata+" data-end="+enddata+">"+nowmonth+"</a>";
         for(var i=1;i< num;i++){
           var submonth = moment().subtract(i, 'months').format('MMM');
-          selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+          var substart = moment().startOf('month').subtract(i, 'months').format('YYYY-MM-DD');
+          var subend = moment().endOf('month').subtract(i, 'months').format('YYYY-MM-DD');
+          selm = "<a data-begin="+substart+" data-end="+subend+">"+submonth+"</a>" + selm;
         }
         $('#selmonth').html(selm);
       }
       else{
-      var lastmonth = moment().set('month', 11).format('MMM');
-      var selm='';
-      selm="<a id="+lastmonth+">"+lastmonth+"</a>";
-      for(var i=10;i>= 0;i--){
-        var submonth = moment().set('month', i).format('MMM');
-        selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
-      }
-      $('#selmonth').html(selm);}
+          var lastmonth = moment().set({'year': 2014,'month':11}).format('MMM');
+        var startdata = moment().set({'year': 2014,'month': 11}).startOf('month').format('YYYY-MM-DD');
+        var enddata = moment().set({'year': 2014,'month': 11}).endOf('month').format('YYYY-MM-DD');
+        var selm='';
+        selm="<a data-begin="+startdata+" data-end="+enddata+">"+lastmonth+"</a>";
+        for(var i=10;i>= 0;i--){
+          var submonth = moment().set({'year': 2014,'month':i}).format('MMM');
+          var substart = moment().set({'year': 2014,'month':i}).startOf('month').format('YYYY-MM-DD');
+          var subend = moment().set({'year': 2014,'month':i}).endOf('month').format('YYYY-MM-DD');
+          selm = "<a data-begin="+substart+" data-end="+subend+">"+submonth+"</a>" + selm;
+        }
+        $('#selmonth').html(selm);}
     })
 
     var nowmonth = moment().format('MMM');
-        var num=moment().format('M');
-        var selm='';
-        selm="<a id="+nowmonth+">"+nowmonth+"</a>";
+        var startdata = moment().startOf('month').format('YYYY-MM-DD');
+        var enddata = moment().endOf('month').format('YYYY-MM-DD');
+        var num = moment().format('M');
+        var selm = '';
+        selm="<a data-begin="+startdata+" data-end="+enddata+">"+nowmonth+"</a>";
         for(var i=1;i< num;i++){
           var submonth = moment().subtract(i, 'months').format('MMM');
-          selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+          var substart = moment().startOf('month').subtract(i, 'months').format('YYYY-MM-DD');
+          var subend = moment().endOf('month').subtract(i, 'months').format('YYYY-MM-DD');
+          selm = "<a data-begin="+substart+" data-end="+subend+">"+submonth+"</a>" + selm;
         }
         $('#selmonth').html(selm);
 
