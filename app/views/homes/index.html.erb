@@ -49,8 +49,6 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('main'));
-      var jsonLei=['淘宝购物','日常消费','美容装扮','娱乐休闲','旅游观光'];
-      var jsonPrice=['268','767','342','875','1280'];
       var option = {
       tooltip : {
         trigger: 'them'
@@ -58,8 +56,7 @@
         legend: {
             orient: 'vertical',
             x:'left',
-            y:'top',
-            data:['淘宝购物','日常消费','美容装扮','娱乐休闲','旅游观光']
+            y:'top'
         },
         toolbox: {
             show : true,
@@ -76,62 +73,36 @@
               type:'pie',
               center: ['50%', '60%'],
               radius: [0, '70%'],
-              selectedMode:'single',
-              data:(function(){
-                      var arrY=[];
-                       $.ajax(
-                       {
-                           url:"fixedExpensesAccountAction!dataXY.action",
-                           dataType:"text",
-                           async: false,
-                           success:function(data)
-                           {
-                              var rows=eval(data);
-                              for(var i=0;i<rows.length;i++)
-                              {
-                              arrY.push(rows[i].accountAmt);
-                              }
-                            }
-                          });
-                        }
-                       return arrY;
-                      })()
-              (function(){
-              //   var res=[];
-              //   var len=-1;
-              //   while (len++< 5){
-              //     res.push({
-              //       name:jsonLei[len],
-              //       value:jsonPrice[len]
-              //     })
-              //   }
-              //   return res;
-              // })()
+              selectedMode:'single'
             }
         ],
         color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
                   }
-        // loadDATA(option);
+        loadDATA(option);
         myChart.setOption(option);
     }
 );
-    // function loadDATA(option){
-    //   $.ajax({
-    //     url:"/reports.json?lei=支出",
-    //     type:"get",
-    //     dataType:"json",
-    //     async:false,
-    //     data:{},
-    //     success:function(result){
-    //       if(result){
-    //         option.series[0].data=[];
-    //         for(var i=0;i< result.length;i++){
-    //           option.series[0].data.push({name:result[i].name,value:result[i].price});
-    //         }
-    //       }
-    //     }
-    //   })
-    // }
+    function loadDATA(option){
+      $.ajax({
+        url:"/reports.json?lei=支出",
+        type:"get",
+        dataType:"json",
+        async:false,
+        data:{},
+        success:function(result){
+          if(result){
+            option.legend.data=[];
+            for(var j=0;j< result.length;j++){
+              option.legend.data.push({name:result[j].way});
+            }
+            option.series[0].data=[];
+            for(var i=0;i< result.length;i++){
+              option.series[0].data.push({name:result[i].way,value:result[i].price});
+            }
+          }
+        }
+      })
+    }
     </script>
   </div>
 </div>

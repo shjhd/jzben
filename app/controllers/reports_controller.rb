@@ -8,8 +8,7 @@ class ReportsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
-      format.json { render json: Item.select("sum(price)").where("time between '2015-03-01' and '2015-03-30'").group("way") }
+      format.json { render json: @reports.select("sum(price) as price, way, lei").where("time between '2015-03-01' and '2015-03-30'").group("way") }
     end
   end
 
