@@ -6,29 +6,22 @@
 
 <div class="panel panel-default new-panel">
   <div class="panel-heading">
-    <select>
-      <option>2014</option>
-      <option selected="selected">2015</option>
-      <option>2016</option>
-    </select>
+    <select id='selyear'></select>
+
     <a class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
-    <a href="#" id="jan">1月</a>
-    <a href="#" id="feb">2月</a>
-    <a href="#" id="mat">3月</a>
-    <a href="#" id="apr">4月</a>
-    <a href="#" id="may">5月</a>
+    <p id="selmonth"></p>
     <a href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
 
-    <a href="#" class="btn btn-default btn-xs a-left">本年</a>
-    <a href="#" class="btn btn-default btn-xs">本季</a>
-    <a href="#" class="btn btn-default btn-xs">时间范围</a>
+    <a href="#" id="local-year" class="btn btn-default btn-xs a-left">本年</a>
+    <a href="#" id="local-season" class="btn btn-default btn-xs">本季</a>
+    <a href="#" id="time-range" class="btn btn-default btn-xs">时间范围</a>
   </div>
   <div id="payget" class="panel-body" style="height:400px">
     Panel content
   <script type="text/javascript">
     require.config({
       paths: {
-          echarts: './js/dist'
+          echarts: './js/dist',
       }
     });
     require(
@@ -37,7 +30,24 @@
         'echarts/chart/pie'
       ],
     function (ec) {
-      var myChart = ec.init(document.getElementById('payget'));
+    var myChart = ec.init(document.getElementById('payget'));
+
+    var nowyear = moment().format('YYYY');
+    var lastyear = moment().subtract(1, 'years').format('YYYY');
+    var sely='';
+    sely = "<option value="+lastyear+">"+lastyear+"</option><option selected='selected' value="+nowyear+">"+nowyear+"</option>"
+    $('#selyear').html(sely);
+
+    var nowmonth = moment().format('MMM');
+    var num=moment().format('M');
+    var selm='';
+    selm="<a id="+nowmonth+">"+nowmonth+"</a>";
+    for(var i=1;i< num;i++){
+      var submonth = moment().subtract(i, 'months').format('MMM');
+      selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+    }
+    $('#selmonth').html(selm);
+
      options:[
         option1={
           tooltip : {
@@ -113,19 +123,19 @@
       }
     ]
           myChart.setOption(option1);
-          $('#jan').click(function() {
+          $('#Jan').click(function() {
             myChart.setOption(option1);
           });
-          $('#feb').click(function() {
+          $('#Feb').click(function() {
             myChart.setOption(option2);
           });
-          $('#mat').click(function() {
+          $('#Mar').click(function() {
             myChart.setOption(option3);
           });
-          $('#apr').click(function() {
+          $('#Apr').click(function() {
             myChart.setOption(option4);
           });
-          $('#may').click(function() {
+          $('#May').click(function() {
             myChart.setOption(option5);
           });
     }

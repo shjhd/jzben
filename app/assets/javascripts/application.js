@@ -19,4 +19,5 @@
 //= require chart/bar.js
 //= require chart/line.js
 //= require chart/pie.js
+//= require moment.js
 //= require_tree .

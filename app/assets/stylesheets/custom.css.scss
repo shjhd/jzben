@@ -87,6 +87,13 @@ body{
 .a-left{
 	margin-left: 98px;
 }
+#selmonth{
+	display: inline;
+	a{
+		padding-right: 8px;
+		cursor: pointer;
+	}
+}
 //yearbiao
 .year-nav{
 	height: 23px;
