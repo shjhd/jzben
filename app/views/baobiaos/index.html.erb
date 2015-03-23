@@ -17,7 +17,8 @@
     <a href="#" id="time-range" class="btn btn-default btn-xs">时间范围</a>
   </div>
   <div id="payget" class="panel-body" style="height:400px">
-    Panel content
+    <input type="radio" value="支出"/>支出
+    <input type="radio" value="收入"/>收入
   <script type="text/javascript">
     require.config({
       paths: {
@@ -36,17 +37,41 @@
     var lastyear = moment().subtract(1, 'years').format('YYYY');
     var sely='';
     sely = "<option value="+lastyear+">"+lastyear+"</option><option selected='selected' value="+nowyear+">"+nowyear+"</option>"
-    $('#selyear').html(sely);
+
+    $('#selyear').html(sely).change(function() {
+      var year = $(this).val();
+      if(year=='2015'){
+        var nowmonth = moment().format('MMM');
+        var num=moment().format('M');
+        var selm='';
+        selm="<a id="+nowmonth+">"+nowmonth+"</a>";
+        for(var i=1;i< num;i++){
+          var submonth = moment().subtract(i, 'months').format('MMM');
+          selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+        }
+        $('#selmonth').html(selm);
+      }
+      else{
+      var lastmonth = moment().set('month', 11).format('MMM');
+      var selm='';
+      selm="<a id="+lastmonth+">"+lastmonth+"</a>";
+      for(var i=10;i>= 0;i--){
+        var submonth = moment().set('month', i).format('MMM');
+        selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+      }
+      $('#selmonth').html(selm);}
+    })
 
     var nowmonth = moment().format('MMM');
-    var num=moment().format('M');
-    var selm='';
-    selm="<a id="+nowmonth+">"+nowmonth+"</a>";
-    for(var i=1;i< num;i++){
-      var submonth = moment().subtract(i, 'months').format('MMM');
-      selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
-    }
-    $('#selmonth').html(selm);
+        var num=moment().format('M');
+        var selm='';
+        selm="<a id="+nowmonth+">"+nowmonth+"</a>";
+        for(var i=1;i< num;i++){
+          var submonth = moment().subtract(i, 'months').format('MMM');
+          selm = "<a id="+submonth+">"+submonth+"</a>" + selm;
+        }
+        $('#selmonth').html(selm);
+
 
      options:[
         option1={
