@@ -85,15 +85,17 @@ body{
 }
 //baobiao
 .a-left{
-	margin-left: 10px;
+	margin-left: 80px;
 }
 #selmonth{
 	display: inline-block;
-	width: 225px;
-	height: 10px;
-	//overflow: hidden;
+	width: 168px;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: -4px;
+	overflow: hidden;
 	a{
-		padding-right: 8px;
+		padding-right: 9px;
 		cursor: pointer;
 	}
 }

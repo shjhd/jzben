@@ -1,16 +1,15 @@
 class ReportsController < ApplicationController
 
   def index
-    if params[:lei]
-      @reports = Item.where(:lei => params[:lei])
-    else
-      @reports = Item.all
-    end
+    @reports = Item.select("sum(price) as price, way, lei")
+    @reports = @reports.where(:lei => params[:lei]) if params[:lei]
+    @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
+    @reports = @reports.group("way")
 
     respond_to do |format|
-      format.json { render json: @reports.select("sum(price) as price, way, lei").where("time between '2015-03-01' and '2015-03-30'", ).group("way") }
-      format.json { render json: @reports.select("sum(price) as price, way, lei").where("time between '?' and '?'", params[:begin], params[:end] ).group("way") }
+      format.json { render json: @reports}
     end
+
   end
 
   def show

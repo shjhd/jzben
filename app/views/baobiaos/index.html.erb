@@ -8,9 +8,9 @@
   <div class="panel-heading">
     <select id='selyear'></select>
 
-    <a class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+    <a id="month-left" class="a-left" href="#"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
     <p id="selmonth"></p>
-    <a href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+    <a id="month-right" href="#"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
 
     <a href="#" id="local-year" class="btn btn-default btn-xs a-left">本年</a>
     <a href="#" id="local-season" class="btn btn-default btn-xs">本季</a>
@@ -33,11 +33,12 @@
     function (ec) {
     var myChart = ec.init(document.getElementById('payget'));
 
+//生成年
     var nowyear = moment().format('YYYY');
     var lastyear = moment().subtract(1, 'years').format('YYYY');
     var sely='';
     sely = "<option value="+lastyear+">"+lastyear+"</option><option selected='selected' value="+nowyear+">"+nowyear+"</option>"
-
+//选择年
     $('#selyear').html(sely).change(function() {
       var year = $(this).val();
       if(year=='2015'){
@@ -56,7 +57,7 @@
         $('#selmonth').html(selm);
       }
       else{
-          var lastmonth = moment().set({'year': 2014,'month':11}).format('MMM');
+        var lastmonth = moment().set({'year': 2014,'month':11}).format('MMM');
         var startdata = moment().set({'year': 2014,'month': 11}).startOf('month').format('YYYY-MM-DD');
         var enddata = moment().set({'year': 2014,'month': 11}).endOf('month').format('YYYY-MM-DD');
         var selm='';
@@ -69,8 +70,8 @@
         }
         $('#selmonth').html(selm);}
     })
-
-    var nowmonth = moment().format('MMM');
+//生成月
+        var nowmonth = moment().format('MMM');
         var startdata = moment().startOf('month').format('YYYY-MM-DD');
         var enddata = moment().endOf('month').format('YYYY-MM-DD');
         var num = moment().format('M');
@@ -83,100 +84,98 @@
           selm = "<a data-begin="+substart+" data-end="+subend+">"+submonth+"</a>" + selm;
         }
         $('#selmonth').html(selm);
-
-
-     options:[
-        option1={
-          tooltip : {
-            trigger: 'them'
-          },
-          color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51'],
-          legend: {
-              orient: 'vertical',
-              x:'left',
-              y:'top',
-              data:['支出','收入']
-          },
-          toolbox: {
-              show : true,
-              feature : {
-                  dataView : {show: true, readOnly: false},
-                  magicType : {show: true, type: ['line', 'bar']},
-                  restore : {show: true},
-                  saveAsImage : {show: true}
+//月份滚动
+        $('#month-right').click(function() {
+              $('#selmonth').animate( { scrollLeft: '+=34' }, 100);
+        });
+        $('#month-left').click(function() {
+              $('#selmonth').animate( { scrollLeft: '-=34' }, 100);
+        });
+//选中月份监听事件
+        function loadDATA(option){
+          $.ajax({
+            url:"/reports.json?lei=支出",
+            type:"get",
+            dataType:"json",
+            async:false,
+            data: {begin:'2015-02-01',end:'2015-03-28'},
+            success:function(result){
+              if(result){
+                option.legend.data=[];
+                for(var j=0;j< result.length;j++){
+                  option.legend.data.push({name:result[j].way});
+                }
+                option.series[0].data=[];
+                for(var i=0;i< result.length;i++){
+                  option.series[0].data.push({name:result[i].way,value:result[i].price});
+                }
               }
-          },
-          series : [
-              {
-                name:'收支统计',
-                type:'pie',
-                center: ['50%', '60%'],
-                radius: [0, '70%'],
-                selectedMode:'single',
-                data:[ {value:335, name:'支出'},
-                  {value:310, name:'收入'}]
-              }
-          ]
-        },
-        option2={
-          series: [
-          {
-            name:'收支统计',
-            type:'pie',
-            data:[ {value:311, name:'支出'},
-              {value:710, name:'收入'}]
-          }
-        ]
-      },
-      option3={
-          series: [
-          {
-            name:'收支统计',
-            type:'pie',
-            data:[ {value:411, name:'支出'},
-              {value:710, name:'收入'}]
-          }
-        ]
-      },
-      option4={
-          series: [
-          {
-            name:'收支统计',
-            type:'pie',
-            data:[ {value:311, name:'支出'},
-              {value:980, name:'收入'}]
-          }
-        ]
-      },
-      option5={
-          series: [
-          {
-            name:'收支统计',
-            type:'pie',
-            data:[ {value:781, name:'支出'},
-              {value:560, name:'收入'}]
-          }
-        ]
+            }
+          })
+          $(document).on('click','a[data-begin]',function(e){
+              e.preventDefault();
+              var $el = $(e.currentTarget);
+              var begin = $el.data('begin');
+              var end = $el.data('end');
+              $.ajax({
+                url:"/reports.json?lei=支出",
+                type:"get",
+                dataType:"json",
+                async:false,
+                data: {begin:begin,end:end},
+                success:function(result){
+                  if(result){
+                    option.legend.data=[];
+                    for(var j=0;j< result.length;j++){
+                      option.legend.data.push({name:result[j].way});
+                    }
+                    option.series[0].data=[];
+                    for(var i=0;i< result.length;i++){
+                      option.series[0].data.push({name:result[i].way,value:result[i].price});
+                    }
+                     myChart.setOption(option);
+                  }
+                }
+            })
+        })
       }
-    ]
-          myChart.setOption(option1);
-          $('#Jan').click(function() {
-            myChart.setOption(option1);
-          });
-          $('#Feb').click(function() {
-            myChart.setOption(option2);
-          });
-          $('#Mar').click(function() {
-            myChart.setOption(option3);
-          });
-          $('#Apr').click(function() {
-            myChart.setOption(option4);
-          });
-          $('#May').click(function() {
-            myChart.setOption(option5);
-          });
+
+      var option = {
+      tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x:'left',
+            y:'top'
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series : [
+            {
+              name:'支出',
+              type:'pie',
+              center: ['50%', '60%'],
+              radius: [0, '70%'],
+              selectedMode:'single'
+            }
+        ],
+        color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
+                  }
+        loadDATA(option);
+        myChart.setOption(option);
     }
 );
+
+
 </script>
   </div>
 </div>
