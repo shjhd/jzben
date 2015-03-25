@@ -16,7 +16,7 @@
     <a href="#" id="local-season" class="btn btn-default btn-xs">本季</a>
     <a href="#" id="time-range" class="btn btn-default btn-xs">时间范围</a>
   </div>
-  <div id="payget" class="panel-body" style="height:400px">
+  <div id="report-pg" class="panel-body" style="height:400px">
     <input type="radio" value="支出"/>支出
     <input type="radio" value="收入"/>收入
   <script type="text/javascript">
@@ -31,7 +31,7 @@
         'echarts/chart/pie'
       ],
     function (ec) {
-    var myChart = ec.init(document.getElementById('payget'));
+    var myChart = ec.init(document.getElementById('report-pg'));
 
 //生成年
     var nowyear = moment().format('YYYY');
@@ -85,11 +85,13 @@
         }
         $('#selmonth').html(selm);
 //月份滚动
-        $('#month-right').click(function() {
-              $('#selmonth').animate( { scrollLeft: '+=34' }, 100);
+        $('#month-right').click(function(a) {
+              a.preventDefault();
+              $('#selmonth').animate( { scrollLeft: '+=33.5' }, 100);
         });
-        $('#month-left').click(function() {
-              $('#selmonth').animate( { scrollLeft: '-=34' }, 100);
+        $('#month-left').click(function(b) {
+              b.preventDefault();
+              $('#selmonth').animate( { scrollLeft: '-=33.5' }, 100);
         });
 //选中月份监听事件
         function loadDATA(option){
@@ -113,7 +115,6 @@
             }
           })
           $(document).on('click','a[data-begin]',function(e){
-              e.preventDefault();
               var $el = $(e.currentTarget);
               var begin = $el.data('begin');
               var end = $el.data('end');
@@ -133,7 +134,8 @@
                     for(var i=0;i< result.length;i++){
                       option.series[0].data.push({name:result[i].way,value:result[i].price});
                     }
-                     myChart.setOption(option);
+                    myChart.clear(option);
+                    myChart.setOption(option);
                   }
                 }
             })
@@ -154,7 +156,6 @@
             show : true,
             feature : {
                 dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
                 restore : {show: true},
                 saveAsImage : {show: true}
             }
