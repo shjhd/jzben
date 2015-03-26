@@ -13,17 +13,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr id='local-get'>
       <td><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>收入</td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr>
-    <tr>
+    <tr id='local-pay'>
       <td><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>支出</td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr>
   </tbody>
 </table>
@@ -37,6 +31,50 @@
   <div id="main" class="panel-body" style="height:400px">
     Panel content
     <script type="text/javascript">
+
+      var startyear = moment().dayOfYear(1).format('YYYY-MM-DD');
+      var endyear = moment().dayOfYear(365).format('YYYY-MM-DD');
+      var startmonth = moment().startOf('month').format('YYYY-MM-DD');
+      var endmonth = moment().endOf('month').format('YYYY-MM-DD');
+      var startweek = moment().weekday(0).format('YYYY-MM-DD');
+      var endweek = moment().weekday(7).format('YYYY-MM-DD');
+
+      var tdlocalget='';
+      tdlocalget="<td data-begin="+startweek+" data-end="+endweek+">"+00+"</td><td data-begin="+startmonth+" data-end="+endmonth+">"+00+"</td><td data-begin="+startyear+" data-end="+endyear+">"+00+"</td>";
+      $('#local-get').append(tdlocalget);
+
+      var tdlocalpay='';
+      tdlocalpay="<td data-begin="+startweek+" data-end="+endweek+">"+00+"</td><td data-begin="+startmonth+" data-end="+endmonth+">"+00+"</td><td data-begin="+startyear+" data-end="+endyear+">"+00+"</td>";
+      $('#local-pay').append(tdlocalpay);
+
+    $(document).ready(function(e){
+      var $el = $(e.currentTarget);
+      var begin = $el.data('begin');
+      var end = $el.data('end');
+      console.log(begin);
+
+      //   $.ajax({
+      //     url:"/reports/home.json",
+      //     type:"get",
+      //     dataType:"json",
+      //     async:false
+      //     data: {begin:begin,end:end},
+      //     success:function(result){
+      //       if(result){
+      //         var income = 0,
+      //             outcome = 0;
+      //         for(var j=0;j< result.length;j++){
+      //             if(result[j].lei=='收入'){
+      //               income=result[j].price;
+      //             }
+      //             else{
+      //               outcome=result[j].price;
+      //             }
+      //         }
+      //       }
+      //     }
+      // })
+    })
     require.config({
       paths: {
           echarts: './js/dist'
@@ -49,6 +87,8 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('main'));
+
+
       var option = {
       tooltip : {
         trigger: 'item',
