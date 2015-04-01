@@ -5,6 +5,7 @@ Jzben::Application.routes.draw do
   resources :reports do
     get :yearbiao, on: :collection
     get :yearall, on: :collection
+    get :home, on: :collection
   end
   resources :shezhis
   resources :items

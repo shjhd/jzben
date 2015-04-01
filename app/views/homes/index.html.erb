@@ -31,51 +31,8 @@
   <div id="main" class="panel-body" style="height:400px">
     Panel content
     <script type="text/javascript">
-
-      var startyear = moment().dayOfYear(1).format('YYYY-MM-DD');
-      var endyear = moment().dayOfYear(365).format('YYYY-MM-DD');
-      var startmonth = moment().startOf('month').format('YYYY-MM-DD');
-      var endmonth = moment().endOf('month').format('YYYY-MM-DD');
-      var startweek = moment().weekday(0).format('YYYY-MM-DD');
-      var endweek = moment().weekday(7).format('YYYY-MM-DD');
-
-      var tdlocalget='';
-      tdlocalget="<td data-begin="+startweek+" data-end="+endweek+">"+00+"</td><td data-begin="+startmonth+" data-end="+endmonth+">"+00+"</td><td data-begin="+startyear+" data-end="+endyear+">"+00+"</td>";
-      $('#local-get').append(tdlocalget);
-
-      var tdlocalpay='';
-      tdlocalpay="<td data-begin="+startweek+" data-end="+endweek+">"+00+"</td><td data-begin="+startmonth+" data-end="+endmonth+">"+00+"</td><td data-begin="+startyear+" data-end="+endyear+">"+00+"</td>";
-      $('#local-pay').append(tdlocalpay);
-
-    $(document).ready(function(e){
-      var $el = $(e.currentTarget);
-      var begin = $el.data('begin');
-      var end = $el.data('end');
-      console.log(begin);
-
-      //   $.ajax({
-      //     url:"/reports/home.json",
-      //     type:"get",
-      //     dataType:"json",
-      //     async:false
-      //     data: {begin:begin,end:end},
-      //     success:function(result){
-      //       if(result){
-      //         var income = 0,
-      //             outcome = 0;
-      //         for(var j=0;j< result.length;j++){
-      //             if(result[j].lei=='收入'){
-      //               income=result[j].price;
-      //             }
-      //             else{
-      //               outcome=result[j].price;
-      //             }
-      //         }
-      //       }
-      //     }
-      // })
-    })
-    require.config({
+    $(document).on('ready',function(e){
+      require.config({
       paths: {
           echarts: './js/dist'
       }
@@ -87,8 +44,6 @@
       ],
     function (ec) {
       var myChart = ec.init(document.getElementById('main'));
-
-
       var option = {
       tooltip : {
         trigger: 'item',
@@ -119,30 +74,75 @@
         color:['#c476de','#14b8f5','#f424d4','#f4ca24','#ef6e51']
                   }
         loadDATA(option);
-        myChart.setOption(option);
-    }
-);
-    function loadDATA(option){
-      $.ajax({
-        url:"/reports.json?lei=支出",
-        type:"get",
-        dataType:"json",
-        async:false,
-        data:{},
-        success:function(result){
-          if(result){
-            option.legend.data=[];
-            for(var j=0;j< result.length;j++){
-              option.legend.data.push({name:result[j].way});
+        function loadDATA(option){
+          $.ajax({
+            url:"/reports.json?lei=支出",
+            type:"get",
+            dataType:"json",
+            async:false,
+            data:{},
+            success:function(result){
+              if(result){
+                option.legend.data=[];
+                for(var j=0;j< result.length;j++){
+                  option.legend.data.push({name:result[j].way});
+                }
+                option.series[0].data=[];
+                for(var i=0;i< result.length;i++){
+                  option.series[0].data.push({name:result[i].way,value:result[i].price});
+                }
+              }
+              myChart.setOption(option);
             }
-            option.series[0].data=[];
-            for(var i=0;i< result.length;i++){
-              option.series[0].data.push({name:result[i].way,value:result[i].price});
-            }
-          }
+          })
         }
+      }
+    );
+
+//本周，本月，本年
+      var startyear = moment().dayOfYear(1).format('YYYY-MM-DD');
+      var endyear = moment().dayOfYear(365).format('YYYY-MM-DD');
+      var startmonth = moment().startOf('month').format('YYYY-MM-DD');
+      var endmonth = moment().endOf('month').format('YYYY-MM-DD');
+      var startweek = moment().weekday(0).format('YYYY-MM-DD');
+      var endweek = moment().weekday(7).format('YYYY-MM-DD');
+
+      loadAJAX(startweek,endweek);
+      loadAJAX(startmonth,endmonth);
+      loadAJAX(startyear,endyear);
+
+      function loadAJAX(begin,end){
+        $.ajax({
+          url:"/reports/home.json",
+          type:"get",
+          dataType:"json",
+          async:false,
+          data: {begin:begin,end:end},
+          success:function(result){
+            var income = 0,
+                outcome = 0;
+            var tdlocalget='';
+            var tdlocalpay='';
+            if(result){
+              for(var j=0;j< result.length;j++){
+                  if(result[j].lei=='收入'){
+                    income=result[j].price;
+                    console.log(income);
+                  }
+                  else{
+                    outcome=result[j].price;
+                    console.log(outcome);
+                  }
+              }
+            }
+            tdlocalget="<td>"+income+"</td>";
+            tdlocalpay="<td>"+outcome+"</td>";
+            $('#local-get').append(tdlocalget);
+            $('#local-pay').append(tdlocalpay);
+          }
       })
     }
+})
     </script>
   </div>
 </div>
