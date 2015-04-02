@@ -5,7 +5,11 @@ class HomesController < ApplicationController
     @homes = Home.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        if !signed_in?
+        render :action => 'page', :layout => false
+        end
+      end
       format.json { render json: @homes }
     end
   end

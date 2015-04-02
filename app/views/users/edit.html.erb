@@ -1,3 +1,12 @@
 <h1>修改资料</h1>
 
-<%= render 'form' %>
+<%= bootstrap_form_for(@user) do |f| %>
+<div class="field">
+
+    <%= f.text_field(  :name, :label=> "用户名", :class=>"form-input" ) %>
+    <%= f.text_field(  :email, :label=> "邮箱", :class=>"form-input" ) %>
+    <%= f.password_field(  :password, :label=> "密码", :class=>"form-input" ) %>
+    <%= f.password_field(  :password_confirmation, :label=> "确认密码", :class=>"form-input" ) %>
+    <%= f.submit "保存",:class=>"btn btn-primary btn-form" %>
+</div>
+<% end %>

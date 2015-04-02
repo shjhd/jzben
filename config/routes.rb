@@ -13,7 +13,6 @@ Jzben::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'homes#index'
-  match '/',  to: 'homes#index'
   match '/new',  to: 'items#index'
   match '/table',  to: 'baobiaos#index'
   match '/yeartable',  to: 'baobiaos#yearbiao'
@@ -25,8 +24,6 @@ Jzben::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  # get 'baobiaos/:lei', to: 'reports#index', defaults: { format: 'json' }
-  # get 'baobiaos/yearbiao/:lei', to: 'reports#yearbiao', defaults: { format: 'json' }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
