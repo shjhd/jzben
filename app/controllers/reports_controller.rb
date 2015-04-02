@@ -34,6 +34,17 @@ class ReportsController < ApplicationController
 
   end
 
+  def duizhang
+    @reports = Item.select("time,lei,way,price,ps")
+    @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
+    @reports = @reports.order("time desc")
+
+    respond_to do |format|
+      format.json { render json: @reports}
+    end
+
+  end
+
   def home
     @reports = Item.select("sum(price) as price,lei")
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
