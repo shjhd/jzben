@@ -11,4 +11,5 @@
 
 class Shezhi < ActiveRecord::Base
   attr_accessible :lei, :way
+  
 end

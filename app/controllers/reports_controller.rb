@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
   def index
-    @reports = Item.select("sum(price) as price, way, lei")
+    @reports = current_user.items.select("sum(price) as price, way, lei")
     @reports = @reports.where(:lei => params[:lei]) if params[:lei]
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
     @reports = @reports.group("way")
@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
   end
 
   def yearbiao
-    @reports = Item.select("sum(price) as price,month(time) as month,lei")
+    @reports = current_user.items.select("sum(price) as price,month(time) as month,lei")
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
     @reports = @reports.group("month(time),lei")
 
@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
   end
 
   def yearall
-    @reports = Item.select("sum(price) as price,year(time) as year,lei")
+    @reports = current_user.items.select("sum(price) as price,year(time) as year,lei")
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
     @reports = @reports.group("year(time),lei")
 
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
   end
 
   def duizhang
-    @reports = Item.select("time,lei,way,price,ps")
+    @reports = current_user.items.select("time,lei,way,price,ps")
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
     @reports = @reports.order("time desc")
 
@@ -46,7 +46,7 @@ class ReportsController < ApplicationController
   end
 
   def home
-    @reports = Item.select("sum(price) as price,lei")
+    @reports = current_user.items.select("sum(price) as price,lei")
     @reports = @reports.where("time between ? and ?", params[:begin],params[:end]) if params[:begin] && params[:end]
     @reports = @reports.group("lei")
 

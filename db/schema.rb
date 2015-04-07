@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150225093503) do
+ActiveRecord::Schema.define(:version => 20150407081247) do
 
   create_table "baobiaos", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20150225093503) do
     t.decimal  "price",      :precision => 8, :scale => 2
     t.date     "time"
     t.string   "way"
+    t.string   "user_id"
   end
 
   create_table "shezhis", :force => true do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20150225093503) do
     t.string   "way"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "user_id"
   end
 
   create_table "users", :force => true do |t|

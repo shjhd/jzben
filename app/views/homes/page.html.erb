@@ -1,21 +1,26 @@
 <head>
+<link href="/assets/custom.css?body=1" media="all" rel="stylesheet" type="text/css">
 	<style type="text/css">
-	*{
-		margin: 0;
-		padding: 0;
-	}
 	.index-bg{
 		width: 100%;
 		height: 100%;
 		background:url("<%= image_path('index-bg01.jpg')%>") no-repeat  center center fixed;
 	}
-	.index-table{
-		width: 600px;
-		height: 500px;
-		background: rgba(255, 255, 255, 0.59);
-		position: absolute;
-		left: 0;top: 0;right: 0;bottom: 0;
-		margin: auto;
+  .btn{
+    width: 80px;
+    margin-right: 10px;
+  }
+  label{
+  	width: 60px;
+  	font-size: 18px;
+  }
+  .form-control{
+		width: 300px;
+		height: 30px;
+		margin-left: 10px;
+	}
+	.top{
+		margin-top: 55px;
 	}
 	</style>
 </head>
@@ -23,9 +28,10 @@
 	<div class='index-table'>
 		<%= bootstrap_form_for(:session, url: sessions_path) do |f| %>
 
-    <%= f.text_field :email %>
-    <%= f.password_field :password %>
+    <%= f.text_field :email,:class=>"top" ,:label=> "邮箱"%>
+    <%= f.password_field :password,:label=> "密码" %>
     <%= f.submit "登入",:class=>"btn btn-primary btn-form" %>
+    <%= link_to "注册", signup_path, :class=>"btn btn-primary" %>
 
 <% end %>
 	</div>

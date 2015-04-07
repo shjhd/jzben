@@ -1,7 +1,7 @@
 <%= bootstrap_form_for(:session, url: sessions_path) do |f| %>
 
-    <%= f.text_field :email %>
-    <%= f.password_field :password %>
+    <%= f.text_field :email,:label=>"邮箱" %>
+    <%= f.password_field :password ,:label=>"密码"%>
     <%= f.submit "登入",:class=>"btn btn-primary btn-form" %>
 
 <% end %>
