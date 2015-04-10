@@ -5,7 +5,7 @@
     <th>类型</th>
     <th></th>
   </tr>
-    <% Shezhi.where(:lei =>'支出').each do |shezhi| %>
+    <% current_user.shezhis.where(:lei =>'支出').each do |shezhi| %>
     <tr class="danger">
       <td><%= shezhi.way %></td>
       <td><%= shezhi.lei %></td>
@@ -22,7 +22,7 @@
     <th>类型</th>
     <th></th>
   </tr>
-  <% Shezhi.where(:lei =>'收入').each do |shezhi| %>
+  <% current_user.shezhis.where(:lei =>'收入').each do |shezhi| %>
     <tr class="danger">
       <td><%= shezhi.way %></td>
       <td><%= shezhi.lei %></td>

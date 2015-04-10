@@ -1,13 +1,14 @@
 class ShezhisController < ApplicationController
+  before_filter :signed_in_user
   # GET /shezhis
   # GET /shezhis.json
   def index
     if params[:lei]
-      @shezhis = Shezhi.where(:lei => params[:lei])
+      @shezhis = current_user.shezhis.where(:lei => params[:lei])
     else
-      @shezhis = Shezhi.all
+      @shezhis = current_user.shezhis.all
     end
-    @shezhi = Shezhi.new
+    @shezhi = current_user.shezhis.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +19,7 @@ class ShezhisController < ApplicationController
   # GET /shezhis/1
   # GET /shezhis/1.json
   def show
-    @shezhi = Shezhi.find(params[:id])
+    @shezhi = current_user.shezhis.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,13 +29,13 @@ class ShezhisController < ApplicationController
 
   # GET /shezhis/1/edit
   def edit
-    @shezhi = Shezhi.find(params[:id])
+    @shezhi = current_user.shezhis.find(params[:id])
   end
 
   # POST /shezhis
   # POST /shezhis.json
   def create
-    @shezhi = Shezhi.new(params[:shezhi])
+    @shezhi = current_user.shezhis.new(params[:shezhi])
 
     respond_to do |format|
       if @shezhi.save
@@ -52,7 +53,7 @@ class ShezhisController < ApplicationController
   # PUT /shezhis/1
   # PUT /shezhis/1.json
   def update
-    @shezhi = Shezhi.find(params[:id])
+    @shezhi = current_user.shezhis.find(params[:id])
 
     respond_to do |format|
       if @shezhi.update_attributes(params[:shezhi])
@@ -68,7 +69,7 @@ class ShezhisController < ApplicationController
   # DELETE /shezhis/1
   # DELETE /shezhis/1.json
   def destroy
-    @shezhi = Shezhi.find(params[:id])
+    @shezhi = current_user.shezhis.find(params[:id])
     @shezhi.destroy
 
     respond_to do |format|

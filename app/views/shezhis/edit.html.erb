@@ -1,6 +1,16 @@
-<h1>Editing shezhi</h1>
+<h1>设置分类</h1>
 
-<%= render 'form' %>
+<%= bootstrap_form_for(@shezhi) do |f| %>
+  <div class="panel panel-primary new-panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">新增类别</h3>
+    </div>
+    <div class="panel-body">
+      <%= f.select( :lei, [['支出', '支出'], ['收入', '收入']],{},{:label=>"类型",:class=>"form-input"} ) %>
+      <%= f.text_field( :way, :label=> "名称", :class=>"form-input sz-lei" ) %>
+      <%= f.submit "保存",:class=>"btn btn-primary btn-form"%>
+    </div>
+  </div>
+<% end %>
 
-<%= link_to 'Show', @shezhi %> |
 <%= link_to 'Back', shezhis_path %>

@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_filter :signed_in_user
   # GET /items
   # GET /items.json
   def index

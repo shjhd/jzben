@@ -44,6 +44,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      @user.shezhis.create({lei:"支出",way:"餐饮美食"})
+      @user.shezhis.create({lei:"支出",way:"淘宝购物"})
+      @user.shezhis.create({lei:"支出",way:"日常消费"})
+      @user.shezhis.create({lei:"支出",way:"美容装扮"})
+      @user.shezhis.create({lei:"支出",way:"娱乐休闲"})
+      @user.shezhis.create({lei:"支出",way:"旅游观光"})
+      @user.shezhis.create({lei:"收入",way:"工资"})
+      @user.shezhis.create({lei:"收入",way:"兼职"})
       sign_in @user
       redirect_to @user
       flash[:success] = "Welcome to the Sample App!"
@@ -76,17 +84,8 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_path, notice: "Please sign in."
-      end
-    end
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
 end

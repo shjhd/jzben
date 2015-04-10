@@ -1,4 +1,5 @@
 class BaobiaosController < ApplicationController
+  before_filter :signed_in_user
   # GET /baobiaos
   # GET /baobiaos.json
   def index
